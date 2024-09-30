@@ -12,6 +12,12 @@ class Database:
             """
             cursor.execute(sql)
 
+            sql_insert = """
+            INSERT INTO ew (task) VALUES (?);
+            """
+            cursor.execute(sql_insert, ('Complete Flask web dev',))
+            db.commit()
+
 
     def get_ews(self):
         """

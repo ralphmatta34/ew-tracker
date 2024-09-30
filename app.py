@@ -10,7 +10,7 @@ def list_ews():
     """
     TO IMPLEMENT
     """
-    pass
+    return 'Get coding!'
 
 @app.route('/add', methods=['POST'])
 def add_ew():
