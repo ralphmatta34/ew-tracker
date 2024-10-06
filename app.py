@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect
 from db import Database
+import os
 
 app = Flask(__name__)
 db = Database('database.db')
@@ -30,3 +31,8 @@ def view_ew(id):
 def delete_ew(id):
     db.delete_ew(id)
     return redirect("/")
+
+
+if __name__ == '__main__':
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
