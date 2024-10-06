@@ -7,23 +7,26 @@ db = Database('database.db')
 
 @app.route('/')
 def list_ews():
-    """
-    TO IMPLEMENT
-    """
-    return 'Get coding!'
+    return render_template("list.html", rows=db.get_ews())
 
 @app.route('/add', methods=['POST'])
 def add_ew():
-    """
-    TO IMPLEMENT
-    """
-    pass
+    title = request.form["title"]
+    subject = request.form["subject"]
+    beak = request.form["beak"]
+    due_date = request.form["due_date"]
+    db.create_ew(title, subject, beak, due_date)
+    return redirect("/")
 
 
 # EXTRA CREDIT
 @app.route('/<int:id>')
 def view_ew(id):
-    """
-    TO IMPLEMENT
-    """
-    pass
+    ew = db.get_ew(id)
+    return render_template("detail.html", ew=ew)
+
+
+@app.route('/delete/<int:id>', methods=['POST'])
+def delete_ew(id):
+    db.delete_ew(id)
+    return redirect("/")

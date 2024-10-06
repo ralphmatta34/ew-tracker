@@ -8,10 +8,25 @@
         <title>View EW</title>
     </head>
 
-    <body class='container col-6'>
+    <body class='container col-6'><br>
         <div>
-            <h2>View EW</h2>
-            <div>EXTRA CREDIT: View EW details here</div>
+            <h2>{{ew[2]}} EW</h2><br>
+            <p>{{ ew[1] }}</p>
         </div>
+
+        <div class="container">
+            <form action="{{ url_for('delete_ew', id=ew[0]) }}" method="POST">
+                <button type="submit" class="btn btn-danger">Mark as done</button> <!-- used ChatGPT for class="btn btn-danger" -->
+            </form>
+        </div><br><br>
+
+        <script>
+            function confirm_delete() { // used ChatGPT for the confirm() function
+                return confirm("Are you sure you want to delete this EW?");
+            }
+        </script>
+
+        <a href="{{ url_for('list_ews') }}">Back to EWs</a>
+
     </body>
 </html>

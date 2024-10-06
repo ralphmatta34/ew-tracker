@@ -8,19 +8,79 @@
         <title>My EWs</title>
     </head>
 
-    <body class='container col-6'>
-        <div class='p-4'>
-            <h2>Add EW</h2>
-            <div>TODO: Build your form here</div>
+    <body class='container col-6'><br>
+
+        <div class="container">
+            <h2>Add EWs</h2>
+            <form action="/add" method="POST" onsubmit="validate_form(event)">
+                <div class="form-group">
+                    <label>Title:</label>
+                    <input type="text" class="form-control" id="title" placeholder="Enter title" name="title">
+                </div>
+                <div class="form-group">
+                    <label>Subject:</label>
+                    <input type="text" class="form-control" id="subject" placeholder="Enter subject" name="subject">
+                </div>
+                <div class="form-group">
+                    <label>Beak:</label>
+                    <input type="text" class="form-control" id="beak" placeholder="Enter beak" name="beak">
+                </div>
+                <div class="form-group">
+                    <label>Due Date:</label>
+                    <input type="date" class="form-control" id="due_date" placeholder="Enter due date" name="due_date">
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
         </div>
 
-        <div class='p-4'>
-            <h2>View EWs</h2>
-            {% if ews|length == 0 %}
+        <br><br>
+
+        <div class="container">
+            <h2>View EWs</h2><br>
+            {% if rows|length == 0 %}
                 <div>No EWs set yet</div>
             {% else %}
-                <div>TODO: View your EWs here</div>
+            <div>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Subject</th>
+                            <th>Beak</th>
+                            <th>Due Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for ew in rows %}
+                        <tr>
+                            <td>{{ ew[1] }}</td>
+                            <td>{{ ew[2] }}</td>
+                            <td>{{ ew[3] }}</td>
+                            <td>{{ ew[4] }}</td>
+                            <td><a href="{{ url_for('view_ew', id=ew[0]) }}">View details</a></td> <!-- used ChatGPT to find what href I should use -->
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
             {% endif %}
         </div>
+
+
+        <div>
+            <script>
+                function validate_form(event) {
+                    const title = document.getElementById("title").value;
+                    const subject = document.getElementById("subject").value;
+                    const beak = document.getElementById("beak").value;
+                    const due_date = document.getElementById("due_date").value;
+                    if (title === "" || subject === "" || beak === "" || due_date === "") {
+                        event.preventDefault()
+                        alert("Cannot leave fields empty.");
+                    }
+                }
+            </script>
+        </div>
+
     </body>
 </html>
